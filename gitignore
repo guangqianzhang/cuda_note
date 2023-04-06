@@ -1,0 +1,17 @@
+# 忽略 Visual Studio 的一些文件和文件夹
+.vs/
+*.sdf
+*.opensdf
+*.vcxproj.user
+*.vcxproj.filters
+
+# 忽略编译输出文件
+/bin/
+/obj/
+
+# 忽略某些文件或文件类型
+*.log
+*.txt
+*.zip
+*.dll
+*.pdb
