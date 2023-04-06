@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{a945ccf0-0ff0-4bdb-8a92-988e703b7777}</ProjectGuid>
-    <RootNamespace>c__</RootNamespace>
-    <ProjectName>c++</ProjectName>
+    <ProjectGuid>{4ab2dde2-f54f-4a04-93b2-5c0b33e5f759}</ProjectGuid>
+    <RootNamespace>clock</RootNamespace>
+    <ProjectName>clock</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -82,16 +82,13 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="c++.cu" />
+    <CudaCompile Include="..\..\cuda-samples\Samples\0_Introduction\clock\clock.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="range.hpp" />
+    <Xml Include="..\..\cuda-samples\Samples\0_Introduction\clock\NsightEclipse.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Makefile" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="NsightEclipse.xml" />
+    <None Include="..\..\cuda-samples\Samples\0_Introduction\clock\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

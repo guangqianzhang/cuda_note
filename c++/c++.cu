@@ -15,14 +15,14 @@ using namespace util::lang;
 // type alias to simplify typing...
 template <typename T>
 using step_range = typename range_proxy<T>::step_range_proxy;
-
+//获得一个可迭代的范围对象
 template <typename T>
 __device__ step_range<T> grid_stride_range(T begin, T end) {
     begin += blockDim.x * blockIdx.x + threadIdx.x;
     return range(begin, end).step(gridDim.x * blockDim.x);
 }
 /////////////////////////////////////////////////////////////////
-
+//计算长度为n的数组data中满足给定谓词p的元素数量. Predicate p 谓词/断言（即判断条件）
 template <typename T, typename Predicate>
 __device__ void count_if(int* count, T* data, int n, Predicate p) {
     for (auto i : grid_stride_range(0, n)) {
@@ -36,8 +36,8 @@ __device__ void count_if(int* count, T* data, int n, Predicate p) {
 __global__ void xyzw_frequency(int* count, char* text, int n) {
     const char letters[]{ 'x', 'y', 'z', 'w' };
 
-    count_if(count, text, n, [&](char c) {
-        for (const auto x : letters)
+    count_if(count, text, n, [&](char c) {  //函数签名：count_if(first, last, pred)
+        for (const auto x : letters)  //lamba函数 用于遍历容器中的元素
             if (c == x) return true;
         return false;
         });
@@ -45,6 +45,7 @@ __global__ void xyzw_frequency(int* count, char* text, int n) {
 
 __global__ void xyzw_frequency_thrust_device(int* count, char* text, int n) {
     const char letters[]{ 'x', 'y', 'z', 'w' };
+    //Thrust 库中的 count_if 算法 将字符数组 text 从 CPU 内存复制到 GPU 设备内存上；
     *count = thrust::count_if(thrust::device, text, text + n, [=](char c) {
         for (const auto x : letters)
             if (c == x) return true;
@@ -75,7 +76,7 @@ int main(int argc, char** argv) {
     // find first CUDA device
     int devID = findCudaDevice(argc, (const char**)argv);
 
-    char* d_text; //cuda 
+    char* d_text;                                                   //cuda text
     checkCudaErrors(cudaMalloc((void**)&d_text, numBytes));
 
     FILE* fp = fopen(filename, "r");
